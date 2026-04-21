@@ -1,35 +1,62 @@
-version: '3.9' # especifica a versão do Docker Compose a ser usada
-
 services:
   postgres:
     image: postgres:15
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: acidentes_db
-      CSV_PATH: /app/raw/acidentes_rodovias.csv
-      #CSV_PATH: https://drive.google.com/file/d/1B-tw0W4UhqPQsCDaOXxyr4P9OVu91NhQ/view?usp=sharing
+      POSTGRES_USER: dbt
+      POSTGRES_PASSWORD: dbt
+      POSTGRES_DB: dbt_db
     ports:
       - "5432:5432"
-    networks:
-      - pipeline-network
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    
+    #networks:
+    #  - dbt-network #pipeline-network
 
-  pipeline:
-    build: .
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-postgres:latest
     depends_on:
       - postgres
-    networks:
-      - pipeline-network
+    #networks:
+    #  - dbt-network #pipeline-network
+    volumes:
+      - .:/usr/app
+      - ./profiles.yml:/root/.dbt/profiles.yml
+    working_dir: /usr/app
+    entrypoint: ["/bin/bash", "-c"]
+    command: "tail -f /dev/null"
+
+  superset:
+    image: apache/superset:latest
+    container_name: superset
+    ports:
+      - "8088:8088"
     environment:
-      DB_HOST: postgres   # 🔥 nome do serviço
-      DB_USER: admin
-      DB_PASS: admin123
-      DB_NAME: acidentes_db
+      SUPERSET_SECRET_KEY: "admin"
+    depends_on:
+      - postgres
+    #networks:
+     # - dbt-network #pipeline-network
 
-networks:
-  pipeline-network:
 
-volumes:
-  postgres_data:
+
+  airflow:
+    image: apache/airflow:2.8.1
+    container_name: airflow
+    depends_on:
+      - postgres
+    #networks:
+     # - dbt-network #pipeline-network
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - .:/usr/app
+    ports:
+      - "8080:8080"
+    command: >
+      bash -c "
+      airflow db init &&
+      airflow users create --username admin --password admin --firstname admin --lastname admin --role Admin --email admin@email.com &&
+      airflow webserver & airflow scheduler
+      "
+
