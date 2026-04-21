@@ -1,6 +1,10 @@
 # Imagem base leve
 FROM python:3.11-slim 
+FROM apache/superset:latest
 
+USER root
+RUN pip install psycopg2-binary
+USER superset
 
 
 
@@ -9,7 +13,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Diretório de trabalho
-WORKDIR /
+WORKDIR /app
 
 # Instalar dependências do sistema (opcional, mas comum)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -31,7 +35,7 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar código da aplicação
-COPY / .
+COPY /app .
 
 # Criar pastas necessárias
 RUN mkdir -p /app/raw /root/.dbt
