@@ -1,118 +1,225 @@
-# 🚀 Pipeline de Ingestão de Dados com Docker, PostgreSQL e Great Expectations
+# 🚀 Projeto de Engenharia de Dados com dbt + PostgreSQL + Superset
 
 ## 📌 Visão Geral
 
-Este projeto implementa um pipeline completo de engenharia de dados
-utilizando:
+Este projeto implementa um pipeline completo de dados utilizando:
 
--   🐳 Docker para containerização\
--   🐘 PostgreSQL como banco de dados\
--   🐍 Python para ETL (Extract, Transform, Load)\
--   📊 Great Expectations para qualidade de dados
+* **dbt (Data Build Tool)** → transformação de dados
+* **PostgreSQL** → armazenamento
+* **Apache Superset** → visualização e dashboards
+* **Docker Compose** → orquestração dos serviços
 
-O objetivo é ingerir dados de acidentes rodoviários a partir de um
-arquivo CSV, validar a qualidade dos dados e armazená-los em um banco
-relacional.
+---
 
-------------------------------------------------------------------------
+## 🧠 Arquitetura
 
-## 🏗️ Arquitetura
+```
+CSV → dbt seed → staging → marts → PostgreSQL → Superset
+```
 
-\[ CSV (Raw Layer) \] → \[ Pipeline Python (ETL) \] → \[ Validação
-(Great Expectations) \] → \[ PostgreSQL \] → \[ Data Docs \]
+---
 
-------------------------------------------------------------------------
+## 📁 Estrutura do Projeto
 
-## 📂 Estrutura do Projeto
+```
+.
+├── docker-compose.yml
+├── dbt_project.yml
+├── profiles.yml
+├── seeds/
+│   └── acidentes_rodovias_2026.csv
+├── models/
+│   ├── staging/
+│   │   └── stg_acidentes.sql
+│   ├── marts/
+│   │   ├── dim_localidade.sql
+│   │   └── fct_acidentes.sql
+├── snapshots/
+│   └── snapshot_acidentes.sql
+├── dags/ (opcional - Airflow)
+```
 
-pipeline-project/ │ ├── app/ │ ├── pipeline.py │ ├── gx_validation.py │
-├── requirements.txt │ ├── data/ │ └── raw/ │ └── acidentes_rodovias.csv
-│ ├── Dockerfile ├── docker-compose.yml ├── .dockerignore ├──
-great_expectations/ └── README.md
+---
 
-------------------------------------------------------------------------
+## 🐳 Docker Compose
 
-## ⚙️ Tecnologias Utilizadas
+### Subir ambiente:
 
--   Docker
--   PostgreSQL
--   Python 3.11
--   Pandas
--   SQLAlchemy
--   Great Expectations
+```bash
+docker compose up -d
+```
 
-------------------------------------------------------------------------
+### Parar ambiente:
 
-## 🐳 Como Executar
+```bash
+docker compose down --remove-orphans
+```
 
-docker compose up --build
+---
 
-Para parar: docker compose down
+## ⚙️ Configuração do dbt
 
-Reset completo: docker compose down -v
+### profiles.yml
 
-------------------------------------------------------------------------
+```yaml
+acidentes_projeto:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: postgres
+      user: dbt
+      password: dbt
+      port: 5432
+      dbname: dbt_db
+      schema: public
+      threads: 2
+```
 
-## 🐘 Banco de Dados
+---
 
-Host: postgres\
-Porta: 5432\
-Database: meubanco\
-Usuário: admin\
-Senha: admin123
+## 🌱 Executar pipeline dbt
 
-------------------------------------------------------------------------
+### Rodar debug
 
-## 🐍 Pipeline
+```bash
+docker compose run dbt debug
+```
 
-Etapas:
+### Carregar dados (CSV)
 
-1.  Extract → leitura do CSV\
-2.  Transform → limpeza e padronização\
-3.  Load → carga no PostgreSQL
+```bash
+docker compose run dbt seed
+```
 
-------------------------------------------------------------------------
+### Executar modelos
 
-## 📊 Qualidade de Dados
+```bash
+docker compose run dbt run
+```
 
-Validações com Great Expectations:
+### Executar snapshots
 
--   Not Null\
--   Range\
--   Formato de Data\
--   Unicidade\
--   Valores válidos
+```bash
+docker compose run dbt snapshot
+```
 
-------------------------------------------------------------------------
+### Executar tudo
 
-## 📄 Data Docs
+```bash
+docker compose run dbt build
+```
 
-Gerar relatório:
+---
 
-python gx_validation.py
+## 📊 Acessar banco PostgreSQL
 
-Local: great_expectations/uncommitted/data_docs/local_site/index.html
+```bash
+docker exec -it lab02_nusp-postgres-1 psql -U dbt -d dbt_db
+```
 
-------------------------------------------------------------------------
+Exemplo:
 
-## ⚠️ Problemas Comuns
+```sql
+SELECT * FROM staging.stg_acidentes LIMIT 10;
+SELECT * FROM marts.fct_acidentes LIMIT 10;
+```
 
-Arquivo não encontrado → verificar /data/raw\
-Erro Docker → remover container antigo\
-Erro NumPy → usar wheel (--only-binary)
+---
 
-------------------------------------------------------------------------
+## 📈 Configurar Apache Superset
 
-## 🚀 Melhorias Futuras
+### Acessar:
 
--   Airflow\
--   Data Warehouse\
--   Dashboard\
--   Cloud
+```
+http://localhost:8088
+```
 
-------------------------------------------------------------------------
+### Criar conexão com banco:
 
-## 📌 Conclusão
+```
+postgresql://dbt:dbt@postgres:5432/dbt_db
+```
 
-Projeto completo de engenharia de dados com ETL, validação e
-persistência.
+---
+
+## 📊 Criar Dataset
+
+* Schema: `marts`
+* Tabela: `fct_acidentes`
+
+---
+
+## 📈 Exemplo de Query Analítica
+
+```sql
+SELECT
+    municipio,
+    COUNT(*) AS total_acidentes
+FROM marts.fct_acidentes
+GROUP BY municipio
+ORDER BY total_acidentes DESC;
+```
+
+---
+
+## 🔄 Pipeline de Dados
+
+1. `dbt seed` → carrega CSV
+2. `dbt run` → transforma dados
+3. `dbt snapshot` → histórico
+4. Superset → visualização
+
+---
+
+## ⚠️ Problemas comuns
+
+### ❌ dbt não conecta ao banco
+
+* Verificar `host: postgres`
+* Verificar containers ativos
+
+### ❌ Container dbt não sobe
+
+```bash
+docker compose logs dbt
+```
+
+### ❌ Superset não conecta
+
+* Usar hostname `postgres`
+* Verificar porta 5432
+
+---
+
+## 🧪 Testes
+
+```bash
+docker compose run dbt test
+```
+
+---
+
+## 💡 Boas práticas
+
+* Usar `staging` para limpeza de dados
+* Usar `marts` para análise
+* Não usar `SELECT *` em produção
+* Versionar tudo com Git
+
+---
+
+## 🚀 Evoluções possíveis
+
+* Orquestração com Airflow
+* Dashboards avançados
+* Modelos incrementais
+* Monitoramento e alertas
+
+---
+
+## 👨‍💻 Autor
+
+Projeto desenvolvido para estudo de Engenharia de Dados.
+
+---
