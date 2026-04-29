@@ -1,33 +1,16 @@
-# Imagem base leve
-FROM python:3.11-slim 
+# base Docker image that we will build on
+FROM python:3.14.3-slim 
 
-# Variáveis de ambiente (boas práticas)
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+# set up our image by installing prerequisites; pandas n this case
+RUN pip install pandas pyarrow
 
-# Diretório de trabalho
+# set up the working directory inside the container
 WORKDIR /app
 
-# Instalar dependências do sistema (opcional, mas comum)
-RUN apt-get update && apt-get install -y \
-    gcc \
-    python3-dev \
-    libpq-dev \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
+# copy the script to the container. 1st name is source file, 2nd is destination
+COPY pipeline.py pipeline.py
 
-# Copiar dependências primeiro (cache eficiente)
-COPY app/requirements.txt .
+# define what to do first when the container runs
+# in this example, we will just run the script
+ENTRYPOINT [ "python", "pipeline.py" ]
 
-# Instalar libs Python
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copiar código da aplicação
-COPY app/ .
-
-# Criar pasta de dados (se necessário)
-RUN mkdir -p /data/raw
-
-# Comando padrão
-CMD ["python", "pipeline.py"]
