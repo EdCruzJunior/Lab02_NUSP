@@ -1,5 +1,5 @@
 pandas
-psycopg2-binary
 sqlalchemy
 requests
-great_expectations==0.18.15
+psycopg2-binary
+great_expectations

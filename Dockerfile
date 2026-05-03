@@ -9,6 +9,9 @@ WORKDIR /app
 
 # copy the script to the container. 1st name is source file, 2nd is destination
 COPY pipeline.py pipeline.py
+COPY app/requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 # define what to do first when the container runs
 # in this example, we will just run the script
