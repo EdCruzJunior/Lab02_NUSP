@@ -1,0 +1,14 @@
+[project]
+name = "test"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "great-expectations>=1.17.1",
+    "pandas>=3.0.2",
+    "psycopg2-binary>=2.9.12",
+    "pyarrow>=24.0.0",
+    "requests>=2.33.1",
+    "sqlalchemy>=2.0.49",
+]
