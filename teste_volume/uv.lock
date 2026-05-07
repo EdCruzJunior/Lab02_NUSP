@@ -695,7 +695,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "great-expectations", specifier = ">=1.17.1" },
+    { name = "great-expectations", specifier = ">=0.17" },
     { name = "pandas", specifier = ">=3.0.2" },
     { name = "psycopg2-binary", specifier = ">=2.9.12" },
     { name = "pyarrow", specifier = ">=24.0.0" },

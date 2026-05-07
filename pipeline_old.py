@@ -139,5 +139,11 @@ def main():
     print("🎉 Pipeline finalizado")
 
 
+import time
+
 if __name__ == "__main__":
     main()
+
+    print("⏸️ Mantendo container ativo para debug...")
+    while True:
+        time.sleep(60)

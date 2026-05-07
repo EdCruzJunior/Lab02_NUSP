@@ -17,7 +17,7 @@ services:
 
   pipeline:
     build: .
-    container_name: ingestion_pipeline
+    container_name: ingestion_pipeline_v2
     depends_on:
       - postgres
     volumes:

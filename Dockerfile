@@ -12,6 +12,7 @@ COPY pipeline.py pipeline.py
 COPY app/requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
+#RUN pip install great_expectations
 
 # define what to do first when the container runs
 # in this example, we will just run the script

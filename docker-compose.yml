@@ -13,19 +13,22 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - docker_network
+      - pipeline_network
 
   pipeline:
     build: .
-    container_name: ingestion_pipeline
+    container_name: ingestion_pipeline_v2
     depends_on:
       - postgres
+    volumes:
+      - ./data:/app/data
+      - ./great_expectations:/app/great_expectations
     networks:
-      - docker_network
+      - pipeline_network
 
 volumes:
   postgres_data:
 
 networks:
-  docker_network:
+  pipeline_network:
     driver: bridge

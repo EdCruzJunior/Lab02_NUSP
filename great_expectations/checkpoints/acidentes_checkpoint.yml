@@ -1,0 +1,16 @@
+name: acidentes_checkpoint
+config_version: 1.0
+
+class_name: Checkpoint
+
+validations:
+  - batch_request:
+      datasource_name: pandas_runtime
+      data_connector_name: runtime_data_connector
+      data_asset_name: acidentes_data
+      runtime_parameters:
+        batch_data: $batch_data
+      batch_identifiers:
+        default_identifier_name: default_id
+
+    expectation_suite_name: acidentes_suite
