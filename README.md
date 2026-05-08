@@ -225,7 +225,8 @@ Arquivo gerado:
 ```text
 great_expectations/uncommitted/data_docs/local_site/index.html
 ```
-<img width="1903" height="910" alt="image" src="https://github.com/user-attachments/assets/7aa5685e-064f-4514-845d-2202f088dd2e" />
+<img width="1894" height="871" alt="image" src="https://github.com/user-attachments/assets/bb85c981-72b6-4e23-bac4-667b67c11730" />
+
 
 ---
 
