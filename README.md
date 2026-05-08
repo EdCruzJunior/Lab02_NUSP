@@ -126,6 +126,7 @@ postgresql://admin:admin123@postgres:5432/acidentes_db
 ---
 
 # Great Expectations (Qualidade de Dados)
+```text
 O que é Great Expectations
 
 Great Expectations é uma ferramenta de Data Quality utilizada para:
@@ -137,7 +138,7 @@ documentação de qualidade
 geração de Data Docs
 
 O framework permite criar regras chamadas de Expectations, responsáveis por validar consistência, formato e integridade dos dados.
-
+```
 📂 Estrutura do Great Expectations
 great_expectations/
 │
