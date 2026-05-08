@@ -95,7 +95,36 @@ project/
 ├── Dockerfile.superset
 └── README.md
 ```
+🐳 Setup do Ambiente (Passo a Passo)
 
+1️⃣ Construir as imagens Docker
+
+docker-compose build
+
+2️⃣ Subir os containers
+
+docker-compose up -d
+
+Verificar:
+
+docker ps
+
+3️⃣ Executar o pipeline
+
+docker exec -it ingestion_pipeline_v2 python pipeline.py
+
+4️⃣ Executar validações do Great Expectations
+
+docker exec -it ingestion_pipeline_v2 bash
+python pipeline.py
+
+5️⃣ Visualizar Data Docs
+
+great_expectations/uncommitted/data_docs/local_site/index.html
+
+🗄️ PostgreSQL
+
+postgresql://admin:admin123@postgres:5432/acidentes_db
 ---
 
 # 🐳 Docker e PostgreSQL
