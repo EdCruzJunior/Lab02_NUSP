@@ -339,6 +339,8 @@ expect_column_values_to_be_in_set(
 Garantir padronização do sentido da via.
 
 ---
+<img width="1918" height="881" alt="image" src="https://github.com/user-attachments/assets/32431a21-00f3-4a25-b724-2f9178b1b350" />
+
 
 # 📊 Métricas de Qualidade
 
@@ -549,6 +551,8 @@ Scatter Plot
 Analisar comportamento espacial e distribuição dos acidentes.
 
 ---
+<img width="1904" height="893" alt="image" src="https://github.com/user-attachments/assets/f3506f3f-d591-4dfc-b0cb-9145146c363f" />
+
 
 # 📌 Resultados Obtidos
 
