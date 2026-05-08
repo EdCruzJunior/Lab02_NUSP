@@ -94,37 +94,45 @@ project/
 ├── Dockerfile
 ├── Dockerfile.superset
 └── README.md
+
 ---
 
-# 🐳 Setup do Ambiente (Passo a Passo)
+ # 🐳 Setup do Ambiente (Passo a Passo)
 
-```text
-1️⃣ Construir as imagens Docker
-```bash
-docker-compose build
-```
-2️⃣ Subir os containers
-```bash
-docker-compose up -d
-```
-Verificar:
+ ```text
+ 1️⃣ Construir as imagens Docker
 
-docker ps
+ ```bash
+ docker-compose build
+ ```
+ 2️⃣ Subir os containers
+ ```bash
+ docker-compose up -d
+ ```
+ Verificar:
+ 
+ ```bash
+ docker ps
+ ```
+ 
+ 3️⃣ Executar o pipeline
+ 
+ ```bash
+ docker exec -it ingestion_pipeline_v2 python pipeline.py
+ ```
+ 
+ 4️⃣ Executar validações do Great Expectations
+ 
+ ```bash
+ docker exec -it ingestion_pipeline_v2 bash
+ python pipeline.py
+ ```
+ 
+ 5️⃣ Visualizar Data Docs
+ ```bash
+ great_expectations/uncommitted/data_docs/local_site/index.html
+ ```
 
-3️⃣ Executar o pipeline
-```bash
-docker exec -it ingestion_pipeline_v2 python pipeline.py
-```
-4️⃣ Executar validações do Great Expectations
-```bash
-docker exec -it ingestion_pipeline_v2 bash
-python pipeline.py
-```
-5️⃣ Visualizar Data Docs
-```bash
-great_expectations/uncommitted/data_docs/local_site/index.html
-```
----
 ---
 
 # 🐳 Docker e PostgreSQL
