@@ -90,6 +90,7 @@ project/
 │   └── great_expectations.yml
 │
 ├── docker-compose.yml
+├── pipeline.py
 ├── Dockerfile
 ├── Dockerfile.superset
 └── README.md
