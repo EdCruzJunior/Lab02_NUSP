@@ -6,11 +6,11 @@
 
 Este projeto implementa um pipeline completo de engenharia de dados utilizando:
 
-* PostgreSQL como camada de armazenamento
-* Great Expectations para qualidade e observabilidade de dados
-* Apache Superset para visualização analítica e dashboards
-* Docker para containerização
-* Python + Pandas para ingestão e transformação
+- PostgreSQL como camada de armazenamento
+- Great Expectations para qualidade e observabilidade de dados
+- Apache Superset para visualização analítica e dashboards
+- Docker para containerização
+- Python + Pandas para ingestão e transformação
 
 ---
 
@@ -18,11 +18,11 @@ Este projeto implementa um pipeline completo de engenharia de dados utilizando:
 
 O objetivo é construir um pipeline de dados moderno capaz de:
 
-* ingerir dados públicos de acidentes rodoviários
-* validar qualidade dos dados
-* armazenar informações estruturadas
-* gerar métricas analíticas
-* disponibilizar dashboards para análise de negócio
+- ingerir dados públicos de acidentes rodoviários
+- validar qualidade dos dados
+- armazenar informações estruturadas
+- gerar métricas analíticas
+- disponibilizar dashboards para análise de negócio
 
 ---
 
@@ -38,15 +38,15 @@ acidentes_2026.csv
 
 Os dados representam acidentes ocorridos em rodovias e incluem informações como:
 
-| Campo     | Descrição                |
-| --------- | ------------------------ |
-| data      | data do acidente         |
-| hora      | hora do acidente         |
-| km        | quilômetro da rodovia    |
-| latitude  | coordenada geográfica    |
-| longitude | coordenada geográfica    |
-| sentido   | direção da pista         |
-| rodovia   | identificação da rodovia |
+| Campo | Descrição |
+|------|-----------|
+| data | data do acidente |
+| hora | hora do acidente |
+| km | quilômetro da rodovia |
+| latitude | coordenada geográfica |
+| longitude | coordenada geográfica |
+| sentido | direção da pista |
+| rodovia | identificação da rodovia |
 
 ---
 
@@ -76,13 +76,18 @@ Apache Superset (Dashboard BI)
 project/
 │
 ├── app/
-│   ├── pipeline.py
+│   └── requirements.txt
 │
 ├── data/
 │   ├── raw/
 │   ├── metrics/
 │
 ├── great_expectations/
+│   ├── expectations/
+│   ├── checkpoints/
+│   ├── uncommitted/
+│   ├── validations/
+│   └── great_expectations.yml
 │
 ├── docker-compose.yml
 ├── Dockerfile
@@ -126,15 +131,138 @@ postgresql://admin:admin123@postgres:5432/acidentes_db
 
 # 🔍 Great Expectations (Qualidade de Dados)
 
-## Objetivo
+## O que é Great Expectations
 
-O Great Expectations foi utilizado para implementar uma camada de observabilidade e validação dos dados na camada RAW.
+Great Expectations é uma ferramenta de Data Quality utilizada para:
+
+- validação de dados
+- observabilidade
+- monitoramento
+- documentação de qualidade
+- geração de Data Docs
+
+O framework permite criar regras chamadas de Expectations, responsáveis por validar consistência, formato e integridade dos dados.
+
+---
+
+# 📂 Estrutura do Great Expectations
+
+```text
+great_expectations/
+│
+├── expectations/
+├── checkpoints/
+├── uncommitted/
+├── validations/
+└── great_expectations.yml
+```
+
+---
+
+# 📂 Pasta expectations/
+
+Responsável por armazenar as suítes de validação (Expectation Suites).
+
+## Arquivos
+
+### `.ge_store_backend_id`
+
+Arquivo interno utilizado pelo Great Expectations para controle do backend de armazenamento das expectations.
+
+---
+
+### `acidentes_suite.json`
+
+Arquivo contendo todas as regras de validação criadas para o dataset.
+
+Exemplo de expectativas armazenadas:
+
+- campos não nulos
+- valores válidos
+- ranges permitidos
+- conjuntos válidos
+
+---
+
+# 📂 Pasta checkpoints/
+
+Responsável por armazenar checkpoints de execução.
+
+Os checkpoints representam execuções organizadas das validações.
+
+## Arquivos
+
+### `.ge_store_backend_id`
+
+Arquivo interno utilizado pelo GX para controle do armazenamento.
+
+---
+
+### `acidentes_checkpoint.yml`
+
+Arquivo YAML contendo:
+
+- expectation suite utilizada
+- datasource
+- batch request
+- ações executadas
+- geração de Data Docs
+
+Exemplo:
+
+```yaml
+name: acidentes_checkpoint
+config_version: 1.0
+```
+
+---
+
+# 📂 Pasta uncommitted/
+
+Contém artefatos temporários e arquivos gerados automaticamente durante as execuções.
+
+---
+
+# 📂 data_docs/local_site/
+
+Responsável pelos Data Docs.
+
+Os Data Docs são páginas HTML geradas automaticamente contendo:
+
+- resultados das validações
+- métricas
+- histórico
+- status de sucesso/falha
+
+Arquivo principal:
+
+```text
+index.html
+```
+
+Abertura:
+
+```text
+great_expectations/uncommitted/data_docs/local_site/index.html
+```
+
+---
+
+# 📂 validations/
+
+Responsável por armazenar os resultados históricos das validações executadas.
+
+Cada execução do pipeline gera um novo registro de validação.
+
+## Arquivos
+
+### `.ge_store_backend_id`
+
+Arquivo interno utilizado pelo Great Expectations para controle dos resultados armazenados.
 
 ---
 
 # ✅ As 5 Expectativas Implementadas
-
----
 
 ## 1. Valores não nulos
 
@@ -211,23 +339,7 @@ Garantir padronização do sentido da via.
 
 ---
 
-# 📊 Data Docs (Observabilidade)
-
-Após a execução do pipeline, o Great Expectations gera automaticamente documentação HTML contendo:
-
-* resultados das validações
-* histórico
-* métricas de qualidade
-
-Arquivo gerado:
-
-```text
-great_expectations/uncommitted/data_docs/local_site/index.html
-```
-
----
-
-# 📈 Métricas de Qualidade
+# 📊 Métricas de Qualidade
 
 O pipeline também registra métricas em:
 
@@ -237,12 +349,12 @@ data/metrics/metrics.csv
 
 Métricas calculadas:
 
-| Métrica            | Descrição              |
-| ------------------ | ---------------------- |
-| success_rate       | percentual de sucesso  |
-| failed             | expectativas com falha |
-| total_expectations | total de validações    |
-| timestamp          | horário da execução    |
+| Métrica | Descrição |
+|--------|-----------|
+| success_rate | percentual de sucesso |
+| failed | expectativas com falha |
+| total_expectations | total de validações |
+| timestamp | horário da execução |
 
 ---
 
@@ -306,9 +418,7 @@ docker exec -it superset bash
 
 ---
 
-# Executar comandos de setup
-
-## Atualizar banco interno
+# Atualizar banco interno
 
 ```bash
 superset db upgrade
@@ -316,7 +426,7 @@ superset db upgrade
 
 ---
 
-## Criar usuário administrador
+# Criar usuário administrador
 
 ```bash
 superset fab create-admin \
@@ -329,7 +439,7 @@ superset fab create-admin \
 
 ---
 
-## Inicializar Superset
+# Inicializar Superset
 
 ```bash
 superset init
@@ -379,9 +489,7 @@ Dashboard Acidentes Rodoviários
 
 # 📈 Os 5 Gráficos Desenvolvidos
 
----
-
-# 1️⃣ KPI — Total de Acidentes
+## 1️⃣ KPI — Total de Acidentes
 
 ### Tipo
 
@@ -393,7 +501,7 @@ Mostrar volume total de acidentes registrados.
 
 ---
 
-# 2️⃣ KPI — KM Médio
+## 2️⃣ KPI — KM Médio
 
 ### Tipo
 
@@ -405,7 +513,7 @@ Mostrar média do quilômetro dos acidentes.
 
 ---
 
-# 3️⃣ Linha — Evolução Temporal
+## 3️⃣ Linha — Evolução Temporal
 
 ### Tipo
 
@@ -417,7 +525,7 @@ Analisar tendência temporal de acidentes.
 
 ---
 
-# 4️⃣ Barra — Acidentes por Sentido
+## 4️⃣ Barra — Acidentes por Sentido
 
 ### Tipo
 
@@ -429,7 +537,7 @@ Identificar distribuição por direção da rodovia.
 
 ---
 
-# 5️⃣ Scatter Plot — KM Médio por Data
+## 5️⃣ Scatter Plot — KM Médio por Data
 
 ### Tipo
 
@@ -445,12 +553,12 @@ Analisar comportamento espacial e distribuição dos acidentes.
 
 O projeto permitiu:
 
-* ingestão automatizada
-* validação de qualidade
-* observabilidade dos dados
-* armazenamento estruturado
-* construção de dashboards analíticos
-* criação de KPIs para negócio
+- ingestão automatizada
+- validação de qualidade
+- observabilidade dos dados
+- armazenamento estruturado
+- construção de dashboards analíticos
+- criação de KPIs para negócio
 
 ---
 
@@ -458,12 +566,12 @@ O projeto permitiu:
 
 Possíveis evoluções:
 
-* integração com Apache Airflow
-* alertas automáticos
-* ingestão incremental
-* camada Silver em Parquet
-* monitoramento em tempo real
-* dashboard geográfico
+- integração com Apache Airflow
+- alertas automáticos
+- ingestão incremental
+- camada Silver em Parquet
+- monitoramento em tempo real
+- dashboard geográfico
 
 ---
 
@@ -471,10 +579,11 @@ Possíveis evoluções:
 
 Este projeto implementa uma arquitetura moderna de engenharia de dados utilizando:
 
-* qualidade de dados
-* governança
-* visualização analítica
-* observabilidade
-* containerização
+- qualidade de dados
+- governança
+- visualização analítica
+- observabilidade
+- containerização
 
 A solução permite escalabilidade e evolução para ambientes produtivos de dados.
+
