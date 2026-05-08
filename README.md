@@ -125,11 +125,103 @@ postgresql://admin:admin123@postgres:5432/acidentes_db
 
 ---
 
-# 🔍 Great Expectations (Qualidade de Dados)
+# Great Expectations (Qualidade de Dados)
+O que é Great Expectations
 
-## Objetivo
+Great Expectations é uma ferramenta de Data Quality utilizada para:
 
-O Great Expectations foi utilizado para implementar uma camada de observabilidade e validação dos dados na camada RAW.
+validação de dados
+observabilidade
+monitoramento
+documentação de qualidade
+geração de Data Docs
+
+O framework permite criar regras chamadas de Expectations, responsáveis por validar consistência, formato e integridade dos dados.
+
+📂 Estrutura do Great Expectations
+great_expectations/
+│
+├── expectations/
+├── checkpoints/
+├── uncommitted/
+├── validations/
+└── great_expectations.yml
+📂 Pasta expectations/
+
+Responsável por armazenar as suítes de validação (Expectation Suites).
+
+Arquivos
+.ge_store_backend_id
+
+Arquivo interno utilizado pelo Great Expectations para controle do backend de armazenamento das expectations.
+
+acidentes_suite.json
+
+Arquivo contendo todas as regras de validação criadas para o dataset.
+
+Exemplo de expectativas armazenadas:
+
+campos não nulos
+valores válidos
+ranges permitidos
+conjuntos válidos
+📂 Pasta checkpoints/
+
+Responsável por armazenar checkpoints de execução.
+
+Os checkpoints representam execuções organizadas das validações.
+
+Arquivos
+.ge_store_backend_id
+
+Arquivo interno utilizado pelo GX para controle do armazenamento.
+
+acidentes_checkpoint.yml
+
+Arquivo YAML contendo:
+
+expectation suite utilizada
+datasource
+batch request
+ações executadas
+geração de Data Docs
+
+Exemplo:
+
+name: acidentes_checkpoint
+config_version: 1.0
+📂 Pasta uncommitted/
+
+Contém artefatos temporários e arquivos gerados automaticamente durante as execuções.
+
+📂 data_docs/local_site/
+
+Responsável pelos Data Docs.
+
+Os Data Docs são páginas HTML geradas automaticamente contendo:
+
+resultados das validações
+métricas
+histórico
+status de sucesso/falha
+
+Arquivo principal:
+
+index.html
+
+Abertura:
+
+great_expectations/uncommitted/data_docs/local_site/index.html
+📂 validations/
+
+Responsável por armazenar os resultados históricos das validações executadas.
+
+Cada execução do pipeline gera um novo registro de validação.
+
+Arquivos
+.ge_store_backend_id
+
+Arquivo interno utilizado pelo Great Expectations para controle dos resultados armazenados.
 
 ---
 
