@@ -94,7 +94,7 @@ project/
 ├── Dockerfile
 ├── Dockerfile.superset
 └── README.md
-
+```
 ---
 
  # 🐳 Setup do Ambiente (Passo a Passo)
