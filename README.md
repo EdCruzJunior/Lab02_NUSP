@@ -441,7 +441,9 @@ Scatter Plot
 Analisar comportamento espacial e distribuição dos acidentes.
 
 ---
+<img width="1903" height="910" alt="image" src="https://github.com/user-attachments/assets/42902a48-5b2e-4f2d-a69b-8d49d949fa33" />
 
+---
 # 📌 Resultados Obtidos
 
 O projeto permitiu:
