@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: fct_acidentes
+    columns:
+      - name: municipio
+        tests:
+          - not_null
+
+      - name: data
+        tests:
+          - not_null
+
+  - name: dim_localidade
+    columns:
+      - name: municipio
+        tests:
+          - unique
+          - not_null

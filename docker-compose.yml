@@ -19,9 +19,9 @@ services:
 
   superset:
     image: apache/superset:latest-dev
-    container_name: superset_lab02
+    container_name: superset_dbt3
     ports:
-    - "8089:8088"
+    - "8092:8088"
     environment:
       SUPERSET_SECRET_KEY: "vztqIUXSrDrrWSrSKOkOh1vX9PJ7S9DhQ0DwL2PTcQt58vvOSCe4a6fx"
     depends_on:

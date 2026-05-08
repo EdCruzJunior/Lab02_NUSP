@@ -1,6 +1,7 @@
 # base Docker image that we will build on
 FROM python:3.14.3-slim 
 
+
 # set up our image by installing prerequisites; pandas n this case
 RUN pip install pandas pyarrow
 
