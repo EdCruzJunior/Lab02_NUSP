@@ -76,7 +76,7 @@ Apache Superset (Dashboard BI)
 project/
 │
 ├── app/
-│   ├── pipeline.py
+│   ├── requirements.txt
 │
 ├── data/
 │   ├── raw/
@@ -87,6 +87,7 @@ project/
 ├── docker-compose.yml
 ├── Dockerfile
 ├── Dockerfile.superset
+├── pipeline.py
 └── README.md
 ```
 
