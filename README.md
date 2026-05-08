@@ -76,7 +76,7 @@ Apache Superset (Dashboard BI)
 project/
 │
 ├── app/
-│   ├── pipeline.py
+│   └── requirements.txt
 │
 ├── data/
 │   ├── raw/
@@ -92,7 +92,6 @@ project/
 ├── docker-compose.yml
 ├── Dockerfile
 ├── Dockerfile.superset
-├── pipeline.py
 └── README.md
 ```
 
@@ -132,9 +131,134 @@ postgresql://admin:admin123@postgres:5432/acidentes_db
 
 # 🔍 Great Expectations (Qualidade de Dados)
 
-## Objetivo
+## O que é Great Expectations
 
-O Great Expectations foi utilizado para implementar uma camada de observabilidade e validação dos dados na camada RAW.
+Great Expectations é uma ferramenta de Data Quality utilizada para:
+
+- validação de dados
+- observabilidade
+- monitoramento
+- documentação de qualidade
+- geração de Data Docs
+
+O framework permite criar regras chamadas de Expectations, responsáveis por validar consistência, formato e integridade dos dados.
+
+---
+
+# 📂 Estrutura do Great Expectations
+
+```text
+great_expectations/
+│
+├── expectations/
+├── checkpoints/
+├── uncommitted/
+├── validations/
+└── great_expectations.yml
+```
+
+---
+
+# 📂 Pasta expectations/
+
+Responsável por armazenar as suítes de validação (Expectation Suites).
+
+## Arquivos
+
+### `.ge_store_backend_id`
+
+Arquivo interno utilizado pelo Great Expectations para controle do backend de armazenamento das expectations.
+
+---
+
+### `acidentes_suite.json`
+
+Arquivo contendo todas as regras de validação criadas para o dataset.
+
+Exemplo de expectativas armazenadas:
+
+- campos não nulos
+- valores válidos
+- ranges permitidos
+- conjuntos válidos
+
+---
+
+# 📂 Pasta checkpoints/
+
+Responsável por armazenar checkpoints de execução.
+
+Os checkpoints representam execuções organizadas das validações.
+
+## Arquivos
+
+### `.ge_store_backend_id`
+
+Arquivo interno utilizado pelo GX para controle do armazenamento.
+
+---
+
+### `acidentes_checkpoint.yml`
+
+Arquivo YAML contendo:
+
+- expectation suite utilizada
+- datasource
+- batch request
+- ações executadas
+- geração de Data Docs
+
+Exemplo:
+
+```yaml
+name: acidentes_checkpoint
+config_version: 1.0
+```
+
+---
+
+# 📂 Pasta uncommitted/
+
+Contém artefatos temporários e arquivos gerados automaticamente durante as execuções.
+
+---
+
+# 📂 data_docs/local_site/
+
+Responsável pelos Data Docs.
+
+Os Data Docs são páginas HTML geradas automaticamente contendo:
+
+- resultados das validações
+- métricas
+- histórico
+- status de sucesso/falha
+
+Arquivo principal:
+
+```text
+index.html
+```
+
+Abertura:
+
+```text
+great_expectations/uncommitted/data_docs/local_site/index.html
+```
+
+---
+
+# 📂 validations/
+
+Responsável por armazenar os resultados históricos das validações executadas.
+
+Cada execução do pipeline gera um novo registro de validação.
+
+## Arquivos
+
+### `.ge_store_backend_id`
+
+Arquivo interno utilizado pelo Great Expectations para controle dos resultados armazenados.
 
 ---
 
@@ -215,23 +339,7 @@ Garantir padronização do sentido da via.
 
 ---
 
-# 📊 Data Docs (Observabilidade)
-
-Após a execução do pipeline, o Great Expectations gera automaticamente documentação HTML contendo:
-
-* resultados das validações
-* histórico
-* métricas de qualidade
-
-Arquivo gerado:
-
-```text
-great_expectations/uncommitted/data_docs/local_site/index.html
-```
-
----
-
-# 📈 Métricas de Qualidade
+# 📊 Métricas de Qualidade
 
 O pipeline também registra métricas em:
 
@@ -440,9 +548,7 @@ Scatter Plot
 Analisar comportamento espacial e distribuição dos acidentes.
 
 ---
-<img width="1903" height="910" alt="image" src="https://github.com/user-attachments/assets/42902a48-5b2e-4f2d-a69b-8d49d949fa33" />
 
----
 # 📌 Resultados Obtidos
 
 O projeto permitiu:
