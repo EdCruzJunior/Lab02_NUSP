@@ -9,7 +9,7 @@ __pycache__/
 venv
 .git
 .gitignore
-data/
+#data/
 
 # C extensions
 *.so
