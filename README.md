@@ -99,7 +99,7 @@ project/
 
  # 🐳 Setup do Ambiente (Passo a Passo)
 
- ```text
+
  1️⃣ Construir as imagens Docker
 
  ```bash
