@@ -126,7 +126,7 @@ postgresql://admin:admin123@postgres:5432/acidentes_db
 ---
 
 # Great Expectations (Qualidade de Dados)
-```text
+---
 O que é Great Expectations
 
 Great Expectations é uma ferramenta de Data Quality utilizada para:
@@ -148,26 +148,27 @@ great_expectations/
 ├── validations/
 └── great_expectations.yml
 📂 Pasta expectations/
-
+---
 Responsável por armazenar as suítes de validação (Expectation Suites).
-
+---
 Arquivos
 .ge_store_backend_id
-
+---
 Arquivo interno utilizado pelo Great Expectations para controle do backend de armazenamento das expectations.
-
+---
 acidentes_suite.json
-
+---
 Arquivo contendo todas as regras de validação criadas para o dataset.
-
+---
 Exemplo de expectativas armazenadas:
 
 campos não nulos
 valores válidos
 ranges permitidos
 conjuntos válidos
+---
 📂 Pasta checkpoints/
-
+---
 Responsável por armazenar checkpoints de execução.
 
 Os checkpoints representam execuções organizadas das validações.
@@ -191,12 +192,13 @@ Exemplo:
 
 name: acidentes_checkpoint
 config_version: 1.0
+---
 📂 Pasta uncommitted/
-
+---
 Contém artefatos temporários e arquivos gerados automaticamente durante as execuções.
-
+---
 📂 data_docs/local_site/
-
+---
 Responsável pelos Data Docs.
 
 Os Data Docs são páginas HTML geradas automaticamente contendo:
@@ -213,8 +215,9 @@ index.html
 Abertura:
 
 great_expectations/uncommitted/data_docs/local_site/index.html
+---
 📂 validations/
-
+---
 Responsável por armazenar os resultados históricos das validações executadas.
 
 Cada execução do pipeline gera um novo registro de validação.
