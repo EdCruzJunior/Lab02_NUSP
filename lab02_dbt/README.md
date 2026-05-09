@@ -1,6 +1,6 @@
 # 🚀 Pipeline de Engenharia de Dados com DBT + PostgreSQL + Apache Superset
 
-## 📊 Visão Geral
+## 📊 Visão Geral --
 
 Este projeto demonstra a construção de um pipeline moderno de dados, transformando dados brutos em insights analíticos utilizando ferramentas amplamente utilizadas no mercado.
 
