@@ -72,6 +72,7 @@ O pipeline está implementado no arquivo: pipeline.py
 docker-compose up -d
 
 ```
+<img width="723" height="61" alt="image" src="https://github.com/user-attachments/assets/23805073-e14d-4433-b41a-348e321d73cc" />
 
 ## ⚙️ Responsabilidades do pipeline
 
