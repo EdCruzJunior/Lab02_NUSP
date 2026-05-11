@@ -1,0 +1,152 @@
+--Ligar o Docker via Vs code
+-- Para verificar as imagens no Docker:
+------------------------------------------------------
+docker images
+------------------------------------------------------
+-- Para verificar os Docker mesmo as que estão paradas:
+docker ps -a
+------------------------------------------------------
+-- Para ligar a image do Docker:
+
+docker start lab02_nusp-postgres-1
+------------------------------------------------------
+
+-- Acessar o PostgreSQL 
+
+docker exec -it lab02_nusp-postgres-1 psql -U admin -d acidentes_db
+
+--###########################################################
+
+ 
+
+-- Descobrir o nome/ID do container:
+
+docker ps
+
+--Instalar o DBT dentro de um Docker criado
+
+docker exec -it lab02_nusp-postgres-1 bash
+
+ou
+
+docker exec -it lab02_nusp-postgres-1 sh
+
+docker exec -it  postgres_dbt sh
+
+----------------------------------------------------------------
+--dentro do container rodar a query abaixo:
+
+pip install dbt-postgres
+
+----------------------------------------------------------------
+--problema comum não encontra o pip. Nesse caso rodar a query abaixo:
+
+apt update && apt install -y python3 python3-pip
+
+----------------------------------------------------------------
+
+--Inserir no arquivo Dockerfile a linha abaixo ( depois salvar o arquivo e buildar ):
+
+# instalar dbt corretamente via pip
+RUN pip install --no-cache-dir dbt-postgres
+
+--Buildar o dbt 
+
+docker build -t meu-dbt .
+
+----------------------------------------------------------------
+
+--Subir o dbt
+
+docker run -it meu-dbt
+
+--########################################################
+# para rodar no PostgreSQL dentro do Docker
+
+docker exec -it lab02_nusp-postgres-1 bash
+
+-- Após entrar no Linux rodar os comandos abaixo para "ligar" o dbt
+
+dbt debug
+dbt run
+dbt test
+--############################################################
+
+--criar o ponto .git dentro do dbt 
+
+
+---------------------------------------------------------------
+
+docker exec -it great_allen bash
+
+--Copiar arquivo para dentro do Docker
+
+docker cp dbt_project.yml great_allen:/app/dbt_project.yml
+
+docker cp profiles.yml great_allen:/root/.dbt/profiles.yml
+
+--############################################################
+
+docker-compose run --rm pipeline bash -c "cd /app && dbt seed"
+docker-compose run --rm pipeline bash -c "cd /app && dbt run"
+
+
+-------------------------------------------------------------
+#-- Criar a rede no Docker :
+
+docker network create dbt-network
+
+#-- subir o Postgres ( rodar o script abaixo no Git Bash ):
+
+docker run -d \
+  --name postgres_dbt \
+  --network dbt-network \
+  -e POSTGRES_USER=dbt \
+  -e POSTGRES_PASSWORD=dbt \
+  -e POSTGRES_DB=dbt_db \
+  postgres:15
+
+#-- Subir dbt
+
+docker run -it \
+  --name dbt \
+  --network dbt-network \
+  ghcr.io/dbt-labs/dbt-postgres:latest
+
+-------------------------------------------------------------
+-- Verificar rede no Docker :
+
+Docker network ls
+Docker network inspect  lab02_nusp_dbt-network  # aqui colocar da rede. deverá aparecer dbt e postgres
+
+
+--------------------------------------------------------------
+
+# -- Remover containers órfãos
+
+docker compose down --remove-orphans
+docker compose up -d
+
+docker compose run dbt debug
+docker compose run dbt seed
+docker compose run dbt run
+docker compose run dbt snapshot
+------------------------------------------
+# -- ou rodar o script abaixo caso dê erro
+
+docker compose run dbt "dbt debug"
+docker compose run dbt "dbt seed"
+docker compose run dbt "dbt run"
+docker compose run dbt "dbt test"
+
+----------------------------------------------------------------
+
+# executar uma query dentro do dbt
+
+docker compose run dbt "dbt show --inline \"select * from staging.stg_acidentes limit 10;\"
+
+
+
+
+
+

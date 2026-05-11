@@ -1,0 +1,17 @@
+name: acidentes_projeto
+version: 1.0
+profile: acidentes_projeto
+
+models:
+  acidentes_projeto:
+    staging:
+      materialized: view
+      schema: staging
+
+    marts:
+      materialized: table
+      schema: marts
+
+snapshots:
+  acidentes_projeto:
+    schema: snapshots
