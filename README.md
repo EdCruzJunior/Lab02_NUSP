@@ -109,7 +109,25 @@ CREATE TABLE acidentes_raw (
     jurisdicao VARCHAR(50)
 );
 ```
+
 ---
+
+## 📥 4. Importar CSV
+
+```bash
+docker cp acidentes_2026.csv postgres_lab02:/tmp/acidentes.csv
+```
+
+```sql
+COPY acidentes_raw
+FROM '/tmp/acidentes.csv'
+DELIMITER ','
+CSV HEADER
+ENCODING 'LATIN1';
+```
+
+---
+
 
 ## 🐳 Ambiente (Docker Compose) --
 
