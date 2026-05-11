@@ -327,7 +327,7 @@ from {{ ref('stg_acidentes') }}
 
 ## a. Testes Genéricos
 ```text
-📄 schema.yml
+📄 tests/schema.yml
 ```
 
 ```yaml
@@ -375,6 +375,8 @@ where data > current_date
 ---
 
 ## 📊 11. Documentação
+
+Acessar o caminho do ambiente python 3.11 criado (Item 2 do documento): lab02_dbt e executar os comandos abaixo:
 
 ```bash
 dbt docs generate
