@@ -473,6 +473,8 @@ Criar 3 gráficos:
 - 📉 Linha → Evolução no tempo
 - 🧭 Scatter → Gravidade dos acidentes
 
+<img width="962" height="400" alt="image" src="https://github.com/user-attachments/assets/a65aaa36-ce56-4ebb-a3f5-92ce7cfa63d5" />
+
 ---
 
 ## 🎯 Resultado Final
