@@ -224,11 +224,13 @@ dbt docs serve
 
 ### Build (imagem customizada com driver PostgreSQL)
 Criar um arquivo Dockerfile.superset e deixá-lo na raiz do projeto:
+
 ```dockerfile
 FROM apache/superset:latest
 USER root
 RUN pip install psycopg[binary]
 USER superset
+
 ```
 ### Subir Superset
 ```bash
@@ -238,6 +240,8 @@ docker run -d \
   -e SUPERSET_SECRET_KEY="vztqIUXSrDrrWSrSKOkOh1vX9PJ7S9DhQ0DwL2PTcQt58vvOSCe4a6fx" \
   apache/superset 
 ```
+
+
 ### Inicializar Superset
 
 ```bash
@@ -251,6 +255,11 @@ docker exec -it superset_dbt3 superset fab create-admin \
   --password admin
 
 docker exec -it superset_dbt3 superset init
+```
+
+### Acessar Superset
+```bash
+http://localhost:8092
 ```
 
 ---
