@@ -55,7 +55,55 @@ Este projeto resolve esses desafios através de um pipeline completo:
 📄 docker-compose.yml
 
 ```bash
-version: '3.8'services:  postgres:    image: postgres:15    container_name: postgres_lab02    environment:      POSTGRES_USER: admin      POSTGRES_PASSWORD: admin      POSTGRES_DB: acidentes_db    ports:      - "5432:5432"  superset:    build:      context: .      dockerfile: dockerfile.superset    container_name: superset    ports:      - "8089:8088"    environment:      SUPERSET_SECRET_KEY: lab_key    depends_on:      - postgres
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_lab02
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: acidentes_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - pipeline_network
+
+
+
+  superset:
+    image: apache/superset:latest-dev
+    container_name: superset_dbt3
+    ports:
+    - "8092:8088"
+    environment:
+      SUPERSET_SECRET_KEY: "vztqIUXSrDrrWSrSKOkOh1vX9PJ7S9DhQ0DwL2PTcQt58vvOSCe4a6fx"
+    depends_on:
+    - postgres
+    networks:
+    - pipeline_network
+
+  pipeline:
+    build: .
+    container_name: ingestion_pipeline_lab02
+    depends_on:
+      - postgres
+    volumes:
+      - ./data:/app/data
+      - ./great_expectations:/app/great_expectations
+    networks:
+      - pipeline_network
+
+volumes:
+  postgres_data:
+
+networks:
+  pipeline_network:
+    driver: bridge
+
 ```
 
 
