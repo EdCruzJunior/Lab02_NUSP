@@ -54,8 +54,9 @@ Este projeto resolve esses desafios através de um pipeline completo:
 
 📄 docker-compose.yml
 
-```text
+```bash
 version: '3.8'services:  postgres:    image: postgres:15    container_name: postgres_lab02    environment:      POSTGRES_USER: admin      POSTGRES_PASSWORD: admin      POSTGRES_DB: acidentes_db    ports:      - "5432:5432"  superset:    build:      context: .      dockerfile: dockerfile.superset    container_name: superset    ports:      - "8089:8088"    environment:      SUPERSET_SECRET_KEY: lab_key    depends_on:      - postgres
+```
 
 
 ---
