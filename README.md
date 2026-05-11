@@ -71,10 +71,43 @@ pip install dbt-postgres
 docker run -d \
   --name postgres_lab02 \
   -e POSTGRES_USER=admin \
-  -e POSTGRES_PASSWORD=admin \
+  -e POSTGRES_PASSWORD=admin123 \
   -e POSTGRES_DB=acidentes_db \
   -p 5433:5432 \
   postgres:15
+```
+
+---
+
+## 📥 3. Criar tabela RAW
+
+```sql
+CREATE TABLE acidentes_raw (
+    data DATE,
+    hora TIME,
+    concessionaria VARCHAR(50),
+    rodovia VARCHAR(20),
+    km NUMERIC(6,2),
+    sentido VARCHAR(10),
+    latitude NUMERIC(10,6),
+    longitude NUMERIC(10,6),
+    classe VARCHAR(100),
+    subclasse VARCHAR(150),
+    causa_provavel VARCHAR(255),
+    vitima_ilesa INT,
+    vitima_leve INT,
+    vitima_moderada INT,
+    vitima_grave INT,
+    vitima_fatal INT,
+    vitimas_sem_info INT,
+    veiculos_envolvidos TEXT,
+    visibilidade VARCHAR(50),
+    condicao_meteriologica VARCHAR(50),
+    municipio VARCHAR(100),
+    regiao_administrativa VARCHAR(100),
+    regional_der VARCHAR(50),
+    jurisdicao VARCHAR(50)
+);
 ```
 ---
 
