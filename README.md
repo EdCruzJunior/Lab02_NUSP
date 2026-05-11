@@ -50,7 +50,7 @@ Este projeto resolve esses desafios através de um pipeline completo:
 
 ---
 
-## 🐳 Ambiente (Docker Compose)
+## 🐳 Ambiente (Docker Compose) --
 
 📄 docker-compose.yml
 
