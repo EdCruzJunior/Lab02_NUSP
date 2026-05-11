@@ -543,6 +543,125 @@ Criar 3 gráficos:
 <img width="962" height="400" alt="image" src="https://github.com/user-attachments/assets/a65aaa36-ce56-4ebb-a3f5-92ce7cfa63d5" />
 
 ---
+## 📊 1. Criar Dataset no Superset
+
+## 🧱 Passo 1
+
+```text
+No Superset:
+
+👉 Data → Datasets → + Dataset
+```
+
+## 🧱 Passo 2
+
+Preencher:
+```text
+Database → acidentes_db
+Schema → public
+Table → fct_acidentes
+
+👉 Clique: Create Dataset
+```
+
+## 📊 2. VISUAL 1 — Gráfico de Barras
+
+🎯 Objetivo:
+Acidentes por município
+
+## 🧱 Passos
+ ```text
+👉 Charts → + Chart
+Dataset: fct_acidentes
+Chart Type: Bar Chart
+```
+
+## ⚙️ Configuração 
+
+```text
+X Axis → municipio
+Metric → COUNT(*)
+
+Nome:
+Acidentes por Município
+```
+
+
+## 📉 3. VISUAL 2 — Série Temporal
+
+## 🎯 Objetivo:
+
+Evolução dos acidentes no tempo
+
+## 🧱 Passos
+
+```text
+👉 Novo Chart
+
+Dataset: fct_acidentes
+Tipo: Time-series Line Chart
+```
+
+## ⚙️ Configuração
+
+```text
+Time Column → data
+Metric → COUNT(*)
+Time Grain → Day
+
+Evolução de Acidentes
+```
+
+### 🧭 4. VISUAL 3 — Dispersão (Scatter)
+
+🎯 Objetivo:
+Gravidade dos acidentes
+
+## 🧱 Passos
+
+``` text 
+👉 Novo Chart
+
+Tipo: Scatter Plot
+⚙️ Configuração
+X → vitima_fatal
+Y → vitima_grave
+Size → vitima_leve
+```
+
+Gravidade dos Acidentes
+
+
+## 📊 5. Criar Dashboard
+
+## 🧱 Passo 1
+
+```text
+👉 Dashboards → + Dashboard
+
+Nome:
+Dashboard Acidentes
+```
+
+## 🧱 Passo 2
+
+```text
+Clique:
+
+👉 Edit Dashboard
+```
+
+## 🧱 Passo 3 — Adicionar gráficos
+
+```text
+Arraste:
+
+Acidentes por Município
+Evolução de Acidentes
+Gravidade dos Acidentes
+
+```
+---
 
 ## 🎯 Resultado Final
 
@@ -554,7 +673,7 @@ Criar 3 gráficos:
 
 ## 🧱 Stack Tecnológica
 
-
+```text
 🐘 PostgreSQL (Banco de dados)
 🔧 DBT (Transformação de dados)
 📊 Apache Superset (Visualização)
@@ -567,13 +686,14 @@ acidentes_raw
 
 🔄 Modelagem DBT
 🟡 Staging Layer
+```
 
 ---
 
 ## Limpeza e padronização
 Seleção de colunas relevantes
 
-
+```text
 🟢 Gold Layer (Marts)
 
 
@@ -590,26 +710,28 @@ case  when vitima_fatal >= 5 then 'ALTA'  when vitima_fatal >= 1 then 'MEDIA'  e
 ✔ Integridade
 ✔ Regras de negócio
 
+```
+
 ---
 
 ## 📊 Dashboards (Superset)
 📈 Visualizações Criadas
 
-1. 📊 Acidentes por Município
+## 1. 📊 Acidentes por Município
 
 
 Tipo: Bar Chart
 Insight: cidades com maior incidência
 
 
-2. 📉 Evolução Temporal
+## 2. 📉 Evolução Temporal
 
 
 Tipo: Line Chart
 Insight: tendência ao longo do tempo
 
 
-3. 🧭 Gravidade dos Acidentes
+## 3. 🧭 Gravidade dos Acidentes
 
 
 Tipo: Scatter Plot
@@ -620,20 +742,27 @@ Insight: relação entre severidade
 
 # 🚀 Como Executar
 
+
 1. Subir ambiente
+```bash
 docker-compose up -d
+```
 
 2. Rodar DBT
+```bash
 dbt run
 dbt test
 dbt docs generate
 dbt docs serve
+```
 
 3. Superset
 Acesse:
+```bash
 http://localhost:8092
-Login:
-admin / admin
+```
+Login:admin
+Pass: admin
 
 ## 🔗 Conexão Superset
 ```bash
@@ -641,11 +770,13 @@ postgresql://admin:admin123@ postgres_lab02:5433/acidentes_db
 ```
 ---
 ## 🎯 Resultados
+```text
 ✔ Pipeline completo de dados
 ✔ Camada GOLD estruturada
 ✔ Dashboard interativo
 ✔ Governança com testes
 ✔ Projeto pronto para produção
+```
 
 ## 📌 Insights Obtidos
 
@@ -659,6 +790,7 @@ Relação entre gravidade e volume
 
 💼 Autor
 
+```text
 Projeto desenvolvido para Laboratório ( Lab02_NUSP) do curso Engenharia de Dados + big Data - Poli USP  em:
 
 
@@ -666,5 +798,6 @@ Engenharia de Dados
 Modelagem Analítica
 Visualização de Dados
 DataOps
+```
 
 
