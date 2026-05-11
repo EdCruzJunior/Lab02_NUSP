@@ -53,6 +53,31 @@ Este projeto resolve esses desafios através de um pipeline completo:
 
 ```
 
+---
+
+## 🧱 1. Ambiente Python (DBT)
+
+```bash
+py -3.11 -m venv venv_dbt
+venv_dbt\Scripts\activate
+pip install --upgrade pip
+pip install dbt-postgres
+```
+---
+
+## 🐘 2. Subir PostgreSQL (Docker)
+
+```bash
+docker run -d \
+  --name postgres_lab02 \
+  -e POSTGRES_USER=admin \
+  -e POSTGRES_PASSWORD=admin \
+  -e POSTGRES_DB=acidentes_db \
+  -p 5433:5432 \
+  postgres:15
+```
+---
+
 ## 🐳 Ambiente (Docker Compose) --
 
 📄 docker-compose.yml
