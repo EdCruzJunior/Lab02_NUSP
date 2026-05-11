@@ -74,15 +74,18 @@ python pipeline.py
 ## ⚙️ Responsabilidades do pipeline
 
 O pipeline realiza automaticamente:
-
+```text
 Download do dataset RAW (acidentes_2026.csv)
 Leitura e validação dos dados
 Tratamento de valores inconsistentes
 Padronização de colunas e tipos de dados
 Carga no PostgreSQL (camada RAW)
 Preparação da base para transformação via DBT
+```
 
 ## 🧭 Fluxo completo de dados
+
+```text
 CSV RAW
    ↓
 pipeline.py
@@ -92,15 +95,17 @@ PostgreSQL (RAW)
 DBT (STAGING → GOLD)
    ↓
 Apache Superset (Dashboard)
-
+```
 
 ## 🎯 Objetivo da camada GOLD
 A camada GOLD representa os dados consolidados e preparados para consumo analítico, permitindo:
 
+```text
 📊 Construção de dashboards
 📈 Criação de KPIs
 🔍 Exploração analítica
 🧠 Geração de insights de negócio
+```
 
 ## ⚠️ Importante
 
