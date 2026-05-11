@@ -236,6 +236,9 @@ tests/
 
 ---
 ## 🔗 8. Sources
+```text
+📄 staging/sources.yml
+```
 
 ```yaml
 version: 2
@@ -253,7 +256,7 @@ sources:
 
 ### 1. Staging
 ```text
-📄 stg_acidentes.sql
+📄 models/stg_acidentes.sql
 ```
 ```sql
 select
@@ -272,7 +275,7 @@ from {{ source('raw', 'acidentes_raw') }}
 
 ### 2. Mart dimensão
 ```text
-📄 dim_localidade.sql
+📄 models/dim_localidade.sql
 ```
 ```sql
 select distinct
@@ -283,7 +286,7 @@ from {{ ref('stg_acidentes') }}
 ```
 ### 3. Mart fato
 ```text
-📄 fct_acidentes.sql
+📄 models/fct_acidentes.sql
 ```
 ```sql
 select
@@ -298,7 +301,7 @@ from {{ ref('stg_acidentes') }}
 ```
 ### 3. Mart fato
 ```text
-📄 fct_acidentes.sql
+📄 models/fct_acidentes.sql
 ```
 ```sql
 select
@@ -334,7 +337,7 @@ from {{ ref('stg_acidentes') }}
 
 ## a. Testes Genéricos
 ```text
-📄 tests/schema.yml
+📄 marts/schema.yml
 ```
 
 ```yaml
