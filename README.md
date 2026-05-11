@@ -64,7 +64,8 @@ Antes da execução do DBT e da criação dos dashboards no Apache Superset, é 
 🚀 Build e execução do pipeline
 
 O pipeline está implementado no arquivo: pipeline.py
-▶️ Executar o pipeline
+---
+## ▶️ Executar o pipeline
 
 ```bash
 python pipeline.py
