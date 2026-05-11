@@ -397,6 +397,8 @@ Abrir:
 ```bash
 http://localhost:8080
 ```
+<img width="919" height="422" alt="image" src="https://github.com/user-attachments/assets/212795b6-aef6-4dcb-a459-530e8479c0f9" />
+
 ---
 
 ## 🚀 Execução final
