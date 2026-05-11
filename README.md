@@ -220,6 +220,35 @@ dbt docs serve
 
 ---
 
+## 🐳 12. Apache Superset
+
+### Build (imagem customizada com driver PostgreSQL)
+Criar um arquivo Dockerfile.superset e deixá-lo na raiz do projeto:
+```dockerfile
+FROM apache/superset:latest
+USER root
+RUN pip install psycopg[binary]
+USER superset
+```
+Executar o comando Bash abaixo para criação do Superset_dbt3
+```bash
+docker run -d \
+  --name superset_dbt3 \
+  -p 8092:8088 \
+  -e SUPERSET_SECRET_KEY="vztqIUXSrDrrWSrSKOkOh1vX9PJ7S9DhQ0DwL2PTcQt58vvOSCe4a6fx" \
+  apache/superset 
+```
+Executar o comando abaixo para realizar o upgrade no SuperSet e criar o init
+
+```bash
+docker exec -it superset_dbt3 superset db upgrade
+docker exec -it superset_dbt3 superset init
+```
+
+```bash
+docker build -t superset-custom -f dockerfile.superset .
+```
+
 ## 🐳 Ambiente (Docker Compose) --
 
 📄 docker-compose.yml
