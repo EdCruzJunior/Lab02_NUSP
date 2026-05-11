@@ -218,4 +218,6 @@ DataOps
 
 
 
----# 🚀 ResultadoEsse README agora é:✔ Profissional (nível portfólio)  ✔ Explicativo (storytelling)  ✔ Reprodutível (docker-compose)  ✔ Visual (arquitetura + prints)  ✔ Valioso para recrutadores  ---# 👇 Se quiser dar mais um upgradePosso te ajudar a:- 📊 adicionar KPIs reais (taxa de fatalidade)- 🌎 incluir mapa interativo no Superset- 🧠 escrever insights prontos para entrevista- 💼 montar versão para LinkedInSó falar 👍
+
+
+🚀 ResultadoEsse README agora é:✔ Profissional (nível portfólio)  ✔ Explicativo (storytelling)  ✔ Reprodutível (docker-compose)  ✔ Visual (arquitetura + prints)  ✔ Valioso para recrutadores  ---# 👇 Se quiser dar mais um upgradePosso te ajudar a:- 📊 adicionar KPIs reais (taxa de fatalidade)- 🌎 incluir mapa interativo no Superset- 🧠 escrever insights prontos para entrevista- 💼 montar versão para LinkedInSó falar 👍
