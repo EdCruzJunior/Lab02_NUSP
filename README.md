@@ -134,7 +134,23 @@ ENCODING 'LATIN1';
 dbt init lab02_dbt
 cd lab02_dbt
 ```
+---
 
+## ⚙️ 6. Configurar profiles.yml
+
+```yaml
+lab02_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: admin
+      password: admin
+      port: 5432
+      dbname: acidentes_db
+      schema: public
+```
 ---
 
 
