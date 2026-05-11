@@ -401,7 +401,7 @@ http://localhost:8080
 
 ## 🚀 Execução final
 
-Acessar o caminho do ambiente python 3.11 criado (Item 2 do documento): lab02_dbt e executar os comandos abaixo:
+Acessar o caminho do ambiente python 3.11 criado (Item 1 do documento): lab02_dbt e executar os comandos abaixo:
 
 ```bash
 dbt run
