@@ -244,28 +244,110 @@ sources:
 
 ## 🧱 9. Models
 
-### staging
+### 1. Staging
+```text
+📄 stg_acidentes.sql
+```
 ```sql
-select * from {{ source('raw','acidentes_raw') }}
+select
+    data,
+    hora,
+    municipio,
+    estado,
+    classe,
+    subclasse,
+    vitima_fatal,
+    vitima_grave,
+    vitima_leve,
+    vitima_ilesa
+from {{ source('raw', 'acidentes_raw') }}
 ```
 
-### mart (fato)
+### 2. Mart dimensão
+```text
+📄 dim_localidade.sql
+```
 ```sql
-select municipio, count(*) as total
+select distinct
+    municipio,
+    regiao_administrativa,
+    regional_der
 from {{ ref('stg_acidentes') }}
-group by municipio
+```
+### 3. Mart fato
+```text
+📄 fct_acidentes.sql
+```
+```sql
+select
+    data,
+    municipio,
+    classe,
+    subclasse,
+    vitima_fatal,
+    vitima_grave,
+    vitima_leve
+from {{ ref('stg_acidentes') }}
+```
+### 3. Mart fato
+```text
+📄 fct_acidentes.sql
+```
+```sql
+select
+    data,
+    municipio,
+    classe,
+    subclasse,
+    vitima_fatal,
+    vitima_grave,
+    vitima_leve
+from {{ ref('stg_acidentes') }}
 ```
 
 ---
 
+## 🧩 10. Macro
+
+```text
+📄 macros/classificar_gravidade.sql
+```
+```sql
+{% macro classificar_gravidade(col) %}
+    case
+        when {{ col }} >= 5 then 'ALTA'
+        when {{ col }} >= 1 then 'MEDIA'
+        else 'BAIXA'
+    end
+{% endmacro %}
+```
+
+---
 ## 🧪 10. Testes
 
+```text
+📄 schema.yml
+```
+
 ```yaml
+version: 2
+
 models:
   - name: fct_acidentes
     columns:
       - name: municipio
         tests:
+          - not_null
+
+      - name: data
+        tests:
+          - not_null
+
+  - name: dim_localidade
+    columns:
+      - name: municipio
+        tests:
+          - unique
           - not_null
 ```
 
