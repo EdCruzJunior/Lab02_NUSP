@@ -53,6 +53,66 @@ Este projeto resolve esses desafios através de um pipeline completo:
 
 ```
 ---
+## 🔄 Execução do Pipeline de Ingestão e Transformação
+
+Antes da execução do DBT e da criação dos dashboards no Apache Superset, é necessário executar o pipeline de ingestão responsável por:
+
+📥 Realizar o download do arquivo RAW (acidentes_2026.csv)
+🧹 Executar a limpeza e padronização dos dados
+🏗️ Estruturar os dados para a camada analítica
+🥇 Disponibilizar os dados tratados na camada GOLD utilizada pelo DBT e pelo Superset
+🚀 Build e execução do pipeline
+
+O pipeline está implementado no arquivo: pipeline.py
+▶️ Executar o pipeline
+
+```bash
+python pipeline.py
+
+```
+
+## ⚙️ Responsabilidades do pipeline
+
+O pipeline realiza automaticamente:
+
+Download do dataset RAW (acidentes_2026.csv)
+Leitura e validação dos dados
+Tratamento de valores inconsistentes
+Padronização de colunas e tipos de dados
+Carga no PostgreSQL (camada RAW)
+Preparação da base para transformação via DBT
+
+## 🧭 Fluxo completo de dados
+CSV RAW
+   ↓
+pipeline.py
+   ↓
+PostgreSQL (RAW)
+   ↓
+DBT (STAGING → GOLD)
+   ↓
+Apache Superset (Dashboard)
+
+
+## 🎯 Objetivo da camada GOLD
+A camada GOLD representa os dados consolidados e preparados para consumo analítico, permitindo:
+
+📊 Construção de dashboards
+📈 Criação de KPIs
+🔍 Exploração analítica
+🧠 Geração de insights de negócio
+
+## ⚠️ Importante
+
+O DBT depende da existência dos dados carregados pelo pipeline.py.
+Portanto, o pipeline deve ser executado antes dos comandos:
+
+```bash
+dbt run
+dbt test
+dbt docs generate
+```
+---
 
 ## 🐳 Ambiente (Docker Compose) --
 
