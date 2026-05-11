@@ -413,7 +413,8 @@ Insight: relação entre severidade
 
 
 
-🚀 Como Executar
+# 🚀 Como Executar
+
 1. Subir ambiente
 docker-compose up -d
 
