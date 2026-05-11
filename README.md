@@ -490,16 +490,6 @@ RUN pip install psycopg[binary]
 USER superset
 
 ```
-### Subir Superset
-```bash
-docker run -d \
-  --name superset_dbt3 \
-  -p 8092:8088 \
-  -e SUPERSET_SECRET_KEY="vztqIUXSrDrrWSrSKOkOh1vX9PJ7S9DhQ0DwL2PTcQt58vvOSCe4a6fx" \
-  apache/superset 
-```
-
-
 ### Inicializar Superset
 
 ```bash
