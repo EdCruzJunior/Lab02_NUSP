@@ -69,9 +69,10 @@ O pipeline está implementado no arquivo: pipeline.py
 ## ▶️ Executar o pipeline
 
 ```bash
-python pipeline.py
+docker-compose up -d
 
 ```
+<img width="723" height="61" alt="image" src="https://github.com/user-attachments/assets/23805073-e14d-4433-b41a-348e321d73cc" />
 
 ## ⚙️ Responsabilidades do pipeline
 
@@ -181,16 +182,10 @@ networks:
 
 ---
 
-## 🐘 2. Subir PostgreSQL (Docker)
+## 🐘 2. Acessar PostgreSQL (Docker)
 
 ```bash
-docker run -d \
-  --name postgres_lab02 \
-  -e POSTGRES_USER=admin \
-  -e POSTGRES_PASSWORD=admin123 \
-  -e POSTGRES_DB=acidentes_db \
-  -p 5433:5432 \
-  postgres:15
+docker exec -it postgres_lab02 psql -U admin -d acidentes_db
 ```
 
 ---
@@ -229,7 +224,7 @@ CREATE TABLE acidentes_raw (
 ---
 
 ## 📥 4. Importar CSV
-
+Acessar o caminho onde foi salvo o arquivo .csv no projeto: /data/raw/ e executar o comando abaixo:
 ```bash
 docker cp acidentes_2026.csv postgres_lab02:/tmp/acidentes.csv
 ```
