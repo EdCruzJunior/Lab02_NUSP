@@ -48,7 +48,7 @@ Este projeto resolve esses desafios através de um pipeline completo:
             |   Dashboards     |
             +------------------+
 
----
+```
 
 ## 🐳 Ambiente (Docker Compose) --
 
