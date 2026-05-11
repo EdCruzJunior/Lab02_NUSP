@@ -181,16 +181,10 @@ networks:
 
 ---
 
-## 🐘 2. Subir PostgreSQL (Docker)
+## 🐘 2. Acessar PostgreSQL (Docker)
 
 ```bash
-docker run -d \
-  --name postgres_lab02 \
-  -e POSTGRES_USER=admin \
-  -e POSTGRES_PASSWORD=admin123 \
-  -e POSTGRES_DB=acidentes_db \
-  -p 5433:5432 \
-  postgres:15
+docker exec -it postgres_lab02 psql -U admin -d acidentes_db
 ```
 
 ---
