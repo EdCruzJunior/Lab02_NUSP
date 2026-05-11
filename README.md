@@ -69,7 +69,7 @@ O pipeline está implementado no arquivo: pipeline.py
 ## ▶️ Executar o pipeline
 
 ```bash
-python pipeline.py
+docker-compose up -d
 
 ```
 
