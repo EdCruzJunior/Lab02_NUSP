@@ -57,12 +57,13 @@ Este projeto resolve esses desafios através de um pipeline completo:
 
 Antes da execução do DBT e da criação dos dashboards no Apache Superset, é necessário executar o pipeline de ingestão responsável por:
 
+```text
 📥 Realizar o download do arquivo RAW (acidentes_2026.csv)
 🧹 Executar a limpeza e padronização dos dados
 🏗️ Estruturar os dados para a camada analítica
 🥇 Disponibilizar os dados tratados na camada GOLD utilizada pelo DBT e pelo Superset
 🚀 Build e execução do pipeline
-
+```
 O pipeline está implementado no arquivo: pipeline.py
 ---
 ## ▶️ Executar o pipeline
