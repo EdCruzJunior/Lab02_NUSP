@@ -196,6 +196,8 @@ cd lab02_dbt
 
 ## ⚙️ 6. Configurar profiles.yml
 
+Path do arquivo profiles.yml: C:\Users\username\.dbt\profiles.yml
+
 ```yaml
 lab02_dbt:
   target: dev
@@ -204,8 +206,8 @@ lab02_dbt:
       type: postgres
       host: localhost
       user: admin
-      password: admin
-      port: 5432
+      password: admin123
+      port: 5433
       dbname: acidentes_db
       schema: public
 ```
@@ -410,6 +412,7 @@ Insight: tendência ao longo do tempo
 
 Tipo: Scatter Plot
 Insight: relação entre severidade
+
 
 
 
