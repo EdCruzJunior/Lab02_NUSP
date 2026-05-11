@@ -256,7 +256,7 @@ cd lab02_dbt
 
 ## ⚙️ 6. Configurar profiles.yml
 
-Path do arquivo profiles.yml: C:\Users\username\.dbt\profiles.yml
+Path do arquivo profiles.yml: C:\Users\username\\.dbt\profiles.yml
 
 ```yaml
 lab02_dbt:
