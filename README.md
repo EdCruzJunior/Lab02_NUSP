@@ -790,14 +790,15 @@ Relação entre gravidade e volume
 
 💼 Autor
 
+Edvaldo da Cruz Jr.
+Projeto desenvolvido para Laboratório ( Lab02_NUSP) do curso Engenharia de Dados + big Data - Poli USP
+
 ```text
-Projeto desenvolvido para Laboratório ( Lab02_NUSP) do curso Engenharia de Dados + big Data - Poli USP  em:
-
-
 Engenharia de Dados 
 Modelagem Analítica
 Visualização de Dados
 DataOps
 ```
+
 
 
