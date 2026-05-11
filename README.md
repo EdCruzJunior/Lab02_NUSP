@@ -128,6 +128,15 @@ ENCODING 'LATIN1';
 
 ---
 
+## 🏗️ 5. Inicializar DBT
+
+```bash
+dbt init lab02_dbt
+cd lab02_dbt
+```
+
+---
+
 
 ## 🐳 Ambiente (Docker Compose) --
 
