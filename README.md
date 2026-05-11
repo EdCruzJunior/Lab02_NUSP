@@ -338,27 +338,24 @@ Criar 3 gráficos:
 - 📉 Linha → Evolução no tempo
 - 🧭 Scatter → Gravidade dos acidentes
 
+---
 
+## 🎯 Resultado Final
+
+✔ Pipeline completo funcionando  
+✔ Camada GOLD pronta  
+✔ Dashboard interativo  
+
+---
 
 ## 🧱 Stack Tecnológica
 
 
 🐘 PostgreSQL (Banco de dados)
-
-
 🔧 DBT (Transformação de dados)
-
-
 📊 Apache Superset (Visualização)
-
-
 🐳 Docker (Containerização)
-
-
 🐍 Python 3.11 (Ambiente)
-
-
-
 📥 Ingestão de Dados
 Fonte: CSV de acidentes
 Tabela RAW:
@@ -368,9 +365,9 @@ acidentes_raw
 🟡 Staging Layer
 
 
-Limpeza e padronização
+---
 
-
+## Limpeza e padronização
 Seleção de colunas relevantes
 
 
@@ -378,10 +375,7 @@ Seleção de colunas relevantes
 
 
 fct_acidentes
-
-
 dim_localidade
-
 
 
 🧩 Macro DBT
@@ -399,8 +393,6 @@ case  when vitima_fatal >= 5 then 'ALTA'  when vitima_fatal >= 1 then 'MEDIA'  e
 
 
 Tipo: Bar Chart
-
-
 Insight: cidades com maior incidência
 
 
@@ -408,8 +400,6 @@ Insight: cidades com maior incidência
 
 
 Tipo: Line Chart
-
-
 Insight: tendência ao longo do tempo
 
 
@@ -417,16 +407,8 @@ Insight: tendência ao longo do tempo
 
 
 Tipo: Scatter Plot
-
-
 Insight: relação entre severidade
 
-
-
-📸 Prints (Adicionar no GitHub)
-🔹 DBT Docs
-
-🔹 Superset Dashboard
 
 
 🚀 Como Executar
@@ -443,7 +425,7 @@ Login:
 admin / admin
 
 🔗 Conexão Superset
-postgresql://admin:admin@host.docker.internal:5432/acidentes_db
+postgresql://admin:admin123@ postgres_lab02:5433/acidentes_db
 
 🎯 Resultados
 ✔ Pipeline completo de dados
@@ -456,28 +438,8 @@ postgresql://admin:admin@host.docker.internal:5432/acidentes_db
 
 
 Municípios com maior número de acidentes
-
-
 Evolução temporal de ocorrências
-
-
 Relação entre gravidade e volume
-
-
-
-🚀 Próximos Passos
-
-
-🔄 Incremental models (dbt)
-
-
-⏱️ Orquestração com Airflow
-
-
-🌎 Mapas geográficos
-
-
-📊 KPIs avançados
 
 
 
@@ -486,14 +448,8 @@ Projeto desenvolvido para demonstração de habilidades em:
 
 
 Engenharia de Dados
-
-
 Modelagem Analítica
-
-
 Visualização de Dados
-
-
 DataOps
 
 
