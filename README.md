@@ -450,10 +450,11 @@ Relação entre gravidade e volume
 
 
 💼 Autor
-Projeto desenvolvido para demonstração de habilidades em:
+
+Projeto desenvolvido para Laboratório ( Lab02_NUSP) do curso Engenharia de Dados + big Data - Poli USP  em:
 
 
-Engenharia de Dados
+Engenharia de Dados 
 Modelagem Analítica
 Visualização de Dados
 DataOps
