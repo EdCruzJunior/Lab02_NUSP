@@ -325,6 +325,7 @@ from {{ ref('stg_acidentes') }}
 ---
 ## 🧪 10. Testes
 
+## a. Testes Genéricos
 ```text
 📄 schema.yml
 ```
@@ -350,6 +351,26 @@ models:
           - unique
           - not_null
 ```
+## b. Testes Singulares
+```text
+📄 tests/test_vitima_negativa.sql
+```
+
+```sql
+select *
+from {{ ref('fct_acidentes') }}
+where vitima_fatal < 0
+```
+
+```text
+📄 tests/test_data_futura.sql
+```
+
+```sql
+select *
+from {{ ref('fct_acidentes') }}
+where data > current_date
+```
 
 ---
 
@@ -359,7 +380,21 @@ models:
 dbt docs generate
 dbt docs serve
 ```
+Abrir:
 
+```bash
+http://localhost:8080
+```
+---
+
+## 🚀 Execução final
+
+```powershell
+dbt run
+dbt test
+dbt docs generate
+dbt docs serve
+```
 ---
 
 ## 🐳 12. Apache Superset
@@ -504,7 +539,10 @@ Insight: relação entre severidade
 docker-compose up -d
 
 2. Rodar DBT
-dbt rundbt test
+dbt run
+dbt test
+dbt docs generate
+dbt docs serve
 
 3. Superset
 Acesse:
