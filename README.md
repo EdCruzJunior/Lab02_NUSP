@@ -153,6 +153,34 @@ lab02_dbt:
 ```
 ---
 
+## 📂 7. Estrutura do Projeto
+
+```
+models/
+├── staging/
+│   ├── sources.yml
+│   └── stg_acidentes.sql
+├── marts/
+│   ├── dim_localidade.sql
+│   └── fct_acidentes.sql
+macros/
+tests/
+```
+
+---
+## 🔗 8. Sources
+
+```yaml
+version: 2
+
+sources:
+  - name: raw
+    schema: public
+    tables:
+      - name: acidentes_raw
+```
+
+---
 
 ## 🐳 Ambiente (Docker Compose) --
 
