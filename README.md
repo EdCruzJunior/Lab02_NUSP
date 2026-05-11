@@ -386,8 +386,11 @@ case  when vitima_fatal >= 5 then 'ALTA'  when vitima_fatal >= 1 then 'MEDIA'  e
 ✔ Integridade
 ✔ Regras de negócio
 
-📊 Dashboards (Superset)
+---
+
+## 📊 Dashboards (Superset)
 📈 Visualizações Criadas
+
 1. 📊 Acidentes por Município
 
 
