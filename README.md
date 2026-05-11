@@ -182,6 +182,44 @@ sources:
 
 ---
 
+## 🧱 9. Models
+
+### staging
+```sql
+select * from {{ source('raw','acidentes_raw') }}
+```
+
+### mart (fato)
+```sql
+select municipio, count(*) as total
+from {{ ref('stg_acidentes') }}
+group by municipio
+```
+
+---
+
+## 🧪 10. Testes
+
+```yaml
+models:
+  - name: fct_acidentes
+    columns:
+      - name: municipio
+        tests:
+          - not_null
+```
+
+---
+
+## 📊 11. Documentação
+
+```bash
+dbt docs generate
+dbt docs serve
+```
+
+---
+
 ## 🐳 Ambiente (Docker Compose) --
 
 📄 docker-compose.yml
