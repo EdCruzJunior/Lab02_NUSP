@@ -121,7 +121,7 @@ dbt docs generate
 ```
 ---
 
-## 🐳 Ambiente (Docker Compose) --
+## 🐳1. Ambiente (Docker Compose) --
 
 📄 docker-compose.yml
 
@@ -178,16 +178,7 @@ networks:
 ```
 
 
----
 
-## 🧱 1. Ambiente Python (DBT)
-
-```bash
-py -3.11 -m venv venv_dbt
-venv_dbt\Scripts\activate
-pip install --upgrade pip
-pip install dbt-postgres
-```
 ---
 
 ## 🐘 2. Subir PostgreSQL (Docker)
@@ -261,7 +252,19 @@ cd lab02_dbt
 ```
 ---
 
-## ⚙️ 6. Configurar profiles.yml
+## 🧱 6. Ambiente Python (DBT)
+
+Acessar o caminho criado lab02_dbt e criar o ambiente Python 3.11 e o banco de dados do dbt conforme o comando abaixo:
+
+```bash
+py -3.11 -m venv venv_dbt
+venv_dbt\Scripts\activate
+pip install --upgrade pip
+pip install dbt-postgres
+```
+---
+
+## ⚙️ 7. Configurar profiles.yml
 
 Path do arquivo profiles.yml: C:\Users\username\\.dbt\profiles.yml
 
@@ -280,7 +283,7 @@ lab02_dbt:
 ```
 ---
 
-## 📂 7. Estrutura do Projeto
+## 📂 8. Estrutura do Projeto
 
 ```
 models/
@@ -302,7 +305,7 @@ tests/
 ```
 
 ---
-## 🔗 8. Sources
+## 🔗 9. Sources
 ```text
 📄 staging\sources.yml
 ```
@@ -319,7 +322,7 @@ sources:
 
 ---
 
-## 🧱 9. Models
+## 🧱 10. Models
 
 ### 1. Staging
 ```text
@@ -384,7 +387,7 @@ from {{ ref('stg_acidentes') }}
 
 ---
 
-## 🧩 10. Macro
+## 🧩 11. Macro
 
 ```text
 📄 macros\classificar_gravidade.sql
@@ -400,7 +403,7 @@ from {{ ref('stg_acidentes') }}
 ```
 
 ---
-## 🧪 10. Testes
+## 🧪 12. Testes
 
 ## a. Testes Genéricos
 ```text
@@ -451,7 +454,7 @@ where data > current_date
 
 ---
 
-## 📊 11. Documentação
+## 📊 13. Documentação
 
 Acessar o caminho do ambiente python 3.11 criado (Item 2 do documento): lab02_dbt e executar os comandos abaixo:
 
@@ -480,7 +483,7 @@ dbt docs serve
 ```
 ---
 
-## 🐳 12. Apache Superset
+## 🐳 14. Apache Superset
 
 ### Build (imagem customizada com driver PostgreSQL)
 Criar um arquivo Dockerfile.superset e deixá-lo na raiz do projeto:
@@ -524,15 +527,15 @@ http://localhost:8092
 
 ---
 
-## 🔗 13. Conectar Superset ao PostgreSQL
+## 🔗 15. Conectar Superset ao PostgreSQL
 
 ```
-postgresql://admin:admin123@ postgres_lab02:5433/acidentes_db
+postgresql://admin:admin123@postgres_lab02:5433/acidentes_db
 ```
 
 --
 
-## 📈 14. Dashboard
+## 📈 16. Dashboard
 
 Criar 3 gráficos:
 
