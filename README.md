@@ -267,7 +267,7 @@ http://localhost:8092
 ## 🔗 13. Conectar Superset ao PostgreSQL
 
 ```
-postgresql://admin:admin@host.docker.internal:5432/acidentes_db
+postgresql://admin:admin123@ postgres_lab02:5433/acidentes_db
 ```
 
 ---
