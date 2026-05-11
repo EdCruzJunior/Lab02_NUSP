@@ -7,6 +7,9 @@ Este projeto demonstra a construção de um pipeline moderno de dados, transform
 ### 🎯 Objetivo
 Transformar dados de acidentes (CSV) em uma camada analítica estruturada (GOLD) e disponibilizar insights através de dashboards interativos.
 
+Este projeto implementa um pipeline completo de engenharia de dados:
+CSV → PostgreSQL (RAW) → DBT (STAGING → MART/GOLD) → Apache Superset (Dashboard)
+
 ---
 
 ## 🧠 Storytelling
@@ -54,7 +57,7 @@ Este projeto resolve esses desafios através de um pipeline completo:
 
 📄 docker-compose.yml
 
-```bash
+```yaml
 version: '3.9'
 
 services:
@@ -207,7 +210,7 @@ dbt rundbt test
 
 3. Superset
 Acesse:
-http://localhost:8089
+http://localhost:8092
 Login:
 admin / admin
 
