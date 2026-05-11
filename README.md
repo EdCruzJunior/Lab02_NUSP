@@ -219,12 +219,19 @@ lab02_dbt:
 models/
 ├── staging/
 │   ├── sources.yml
-│   └── stg_acidentes.sql
+│  
 ├── marts/
-│   ├── dim_localidade.sql
-│   └── fct_acidentes.sql
+│   ├── schema.yml
+├── dim_localidade.sql
+├── fct_acidentes.sql
+└── stg_acidentes.sql
+
 macros/
+└── classificar_gravidade.sql
 tests/
+├── schema.yml
+├── test_data_futura.sql
+└── test_vitima_negativa.sql
 ```
 
 ---
@@ -393,7 +400,7 @@ http://localhost:8080
 
 Acessar o caminho do ambiente python 3.11 criado (Item 2 do documento): lab02_dbt e executar os comandos abaixo:
 
-```powershell
+```bash
 dbt run
 dbt test
 dbt docs generate
