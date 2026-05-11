@@ -427,22 +427,25 @@ http://localhost:8092
 Login:
 admin / admin
 
-🔗 Conexão Superset
+## 🔗 Conexão Superset
+```bash
 postgresql://admin:admin123@ postgres_lab02:5433/acidentes_db
-
-🎯 Resultados
+```
+---
+## 🎯 Resultados
 ✔ Pipeline completo de dados
 ✔ Camada GOLD estruturada
 ✔ Dashboard interativo
 ✔ Governança com testes
 ✔ Projeto pronto para produção
 
-📌 Insights Obtidos
+## 📌 Insights Obtidos
 
-
+```text
 Municípios com maior número de acidentes
 Evolução temporal de ocorrências
 Relação entre gravidade e volume
+```
 
 
 
