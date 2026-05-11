@@ -230,7 +230,7 @@ USER root
 RUN pip install psycopg[binary]
 USER superset
 ```
-Executar o comando Bash abaixo para criação do Superset_dbt3
+### Subir Superset
 ```bash
 docker run -d \
   --name superset_dbt3 \
@@ -238,16 +238,30 @@ docker run -d \
   -e SUPERSET_SECRET_KEY="vztqIUXSrDrrWSrSKOkOh1vX9PJ7S9DhQ0DwL2PTcQt58vvOSCe4a6fx" \
   apache/superset 
 ```
-Executar o comando abaixo para realizar o upgrade no SuperSet e criar o init
+### Inicializar Superset
 
 ```bash
 docker exec -it superset_dbt3 superset db upgrade
+
+docker exec -it superset_dbt3 superset fab create-admin \
+  --username admin \
+  --firstname Admin \
+  --lastname User \
+  --email admin@admin.com \
+  --password admin
+
 docker exec -it superset_dbt3 superset init
 ```
 
-```bash
-docker build -t superset-custom -f dockerfile.superset .
+---
+
+## 🔗 13. Conectar Superset ao PostgreSQL
+
 ```
+postgresql://admin:admin@host.docker.internal:5432/acidentes_db
+```
+
+---
 
 ## 🐳 Ambiente (Docker Compose) --
 
