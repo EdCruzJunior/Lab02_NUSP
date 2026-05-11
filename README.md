@@ -304,7 +304,7 @@ tests/
 ---
 ## 🔗 8. Sources
 ```text
-📄 staging/sources.yml
+📄 staging\sources.yml
 ```
 
 ```yaml
@@ -323,7 +323,7 @@ sources:
 
 ### 1. Staging
 ```text
-📄 models/stg_acidentes.sql
+📄 models\stg_acidentes.sql
 ```
 ```sql
 select
@@ -342,7 +342,7 @@ from {{ source('raw', 'acidentes_raw') }}
 
 ### 2. Mart dimensão
 ```text
-📄 models/dim_localidade.sql
+📄 models\dim_localidade.sql
 ```
 ```sql
 select distinct
@@ -353,7 +353,7 @@ from {{ ref('stg_acidentes') }}
 ```
 ### 3. Mart fato
 ```text
-📄 models/fct_acidentes.sql
+📄 models\fct_acidentes.sql
 ```
 ```sql
 select
@@ -368,7 +368,7 @@ from {{ ref('stg_acidentes') }}
 ```
 ### 3. Mart fato
 ```text
-📄 models/fct_acidentes.sql
+📄 models\fct_acidentes.sql
 ```
 ```sql
 select
@@ -387,7 +387,7 @@ from {{ ref('stg_acidentes') }}
 ## 🧩 10. Macro
 
 ```text
-📄 macros/classificar_gravidade.sql
+📄 macros\classificar_gravidade.sql
 ```
 ```sql
 {% macro classificar_gravidade(col) %}
@@ -404,7 +404,7 @@ from {{ ref('stg_acidentes') }}
 
 ## a. Testes Genéricos
 ```text
-📄 marts/schema.yml
+📄 marts\schema.yml
 ```
 
 ```yaml
@@ -430,7 +430,7 @@ models:
 ```
 ## b. Testes Singulares
 ```text
-📄 tests/test_vitima_negativa.sql
+📄 tests\test_vitima_negativa.sql
 ```
 
 ```sql
@@ -440,7 +440,7 @@ where vitima_fatal < 0
 ```
 
 ```text
-📄 tests/test_data_futura.sql
+📄 tests\test_data_futura.sql
 ```
 
 ```sql
