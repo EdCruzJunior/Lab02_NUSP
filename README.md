@@ -223,7 +223,7 @@ CREATE TABLE acidentes_raw (
 ---
 
 ## 📥 4. Importar CSV
-
+Acessar o caminho onde foi salvo o arquivo .csv no projeto: /data/raw/ e executar o comando abaixo:
 ```bash
 docker cp acidentes_2026.csv postgres_lab02:/tmp/acidentes.csv
 ```
